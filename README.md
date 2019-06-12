@@ -1,0 +1,35 @@
+# Multi mining demo
+
+**Multi mining** is designed to make mining hashrate acts on multi chains(or shards) concurrently to resist 1% attach of PoW consensus.
+
+**Multi mining demo** shows how it works.
+
+## Install
+```
+mkdir -p build
+cd build
+go build ..
+```
+
+## Usage
+
+### Args
+```
+-mode string
+    	mining mode: single / multi
+-diff string
+    	mining difficulty: a number for single , 4 number seperated by ',' for multi mode
+```
+
+### Example for single mode
+```
+./build/multi-mining-demo -logtostderr=true -mode=single -diff=16777216
+```
+
+### Example for multi mode
+```
+./build/multi-mining-demo -logtostderr=true -mode=multi -diff=16777216,8388608,33554432,33554432
+```
+
+## Testing
+[Test report](./docs/test_report.md)
