@@ -40,6 +40,10 @@ func (singleMiner *SingleMiner) mine() {
 			if hashBig.Cmp(target) < 0 {
 				singleMiner.job.blockCount++
 				glog.Infof("new block found, miner=%v, hashHex=%v", singleMiner.coinbase, hashHex)
+
+				merkleRoot = randomMerkleRoot()
+				nonce = 0
+				continue
 			}
 
 			nonce++
@@ -111,11 +115,11 @@ func (multiMiner *MultiMiner) mine() {
 
 		nonce := uint64(0)
 		multiHead := new(MultiHead)
+		multiHead.shardCount = uint32(len(multiMiner.jobs))
 
 		for {
 
 			multiHead.headRoot = headRoot
-			multiHead.shardCount = uint32(len(multiMiner.jobs))
 			multiHead.nonce = nonce
 
 			hash := multiHead.hash()
@@ -159,6 +163,7 @@ func (multiMiner *MultiMiner) mine() {
 			if found {
 				nonce = 0
 				headRoot = multiMiner.makeHeadRoot(singleHead0.hash(), singleHead1.hash(), singleHead2.hash(), singleHead3.hash())
+				continue
 			}
 
 			nonce++
