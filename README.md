@@ -18,7 +18,7 @@ go build ..
 -mode string
     	mining mode: single / multi
 -diff string
-    	mining difficulty: a number for single , 4 number seperated by ',' for multi mode
+    	mining difficulty: a number for single mode , 4 number seperated by ',' for multi mode
 ```
 
 ### Example for single mode
