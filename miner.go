@@ -171,8 +171,8 @@ func (multiMiner *MultiMiner) mine() {
 
 				singleHead0.merkleRoot = merkleRoot0
 				singleHead1.merkleRoot = merkleRoot1
-				singleHead2.merkleRoot = merkleRoot1
-				singleHead3.merkleRoot = merkleRoot1
+				singleHead2.merkleRoot = merkleRoot2
+				singleHead3.merkleRoot = merkleRoot3
 
 				nonce = 0
 				headRoot = multiMiner.makeHeadRoot(singleHead0.hash(), singleHead1.hash(), singleHead2.hash(), singleHead3.hash())

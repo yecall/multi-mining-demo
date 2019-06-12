@@ -10,7 +10,7 @@ type Job struct {
 	shardNum   uint32
 	difficulty uint64
 	blockCount int64
-	startTsN    int64
+	startTsN   int64
 }
 
 func NewJob(shardNum uint32, difficulty uint64) *Job {
@@ -36,9 +36,12 @@ func (job *Job) reportOnce() {
 
 	now := time.Now().UnixNano()
 	durationN := now - job.startTsN
-	avgBlockIntervalN := durationN / job.blockCount
+	avgBlockIntervalN := int64(0)
+	if job.blockCount > 0 {
+		avgBlockIntervalN = durationN / job.blockCount
+	}
 
-	durationS := fmt.Sprintf("%d",  durationN/1000000000)
+	durationS := fmt.Sprintf("%d", durationN/1000000000)
 	avgBlockIntervalS := fmt.Sprintf("%.3f", float64(avgBlockIntervalN)/1000000000)
 
 	reportStr := fmt.Sprintf(
